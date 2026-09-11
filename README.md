@@ -1,1 +1,1 @@
-# Aerofoil-CFD-Solver
+# panel-method-aerofoil
