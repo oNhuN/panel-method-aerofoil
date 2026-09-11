@@ -32,7 +32,6 @@ int main ()
     std::cout << result.x << ", " << result.y << '\n';
     std::cout << vortex_result.x << ", " << vortex_result.y << '\n';
 
-
     if (!writeCSV_NACA(points, "points.csv"))
         std::cout <<"Failed to open the csv file!";
     if(!writeCSV_Panel(panels, "panel.csv"))
