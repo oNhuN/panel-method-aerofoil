@@ -8,9 +8,9 @@
 int main ()
 {
     const int n_per_surface = 200;
-    const double m = 0.0;
-    const double p = 0.0;
-    const double t = 0.02;
+    const double m = 0;
+    const double p = 0;
+    const double t = 0.12;
 
     auto points{generateAerofoil(n_per_surface, m, p, t)}; //auto: works out the type of data from the initializer
     
@@ -21,7 +21,7 @@ int main ()
 
     // double alpha{(5*pi)/180};
     // double alpha{(2.5*pi)/180};
-    double alpha{(10*pi)/180};
+    // double alpha{(10 *pi)/180};
 
     Panel test_panel{
         {0.506364, -0.0267117},   // start
@@ -50,32 +50,59 @@ int main ()
     std::cout << result.x << ", " << result.y << '\n';
     std::cout << vortex_result.x << ", " << vortex_result.y << '\n';
 
-    if (!writeCSV_NACA(points, "points.csv"))
-        std::cout <<"Failed to open the csv file!";
-    if(!writeCSV_Panel(panels, "panel.csv"))
-        std::cout <<"Failed to open the csv file!";
 
-    //linear system storing
-    LinearSystem linear_system(matrixAssembly(panels, alpha)); 
-    std::vector<double> x{solveLinearSystem(linear_system.A, linear_system.b)}; 
+    // //Week C milestone
+    // //linear system storing
+    // LinearSystem linear_system(matrixAssembly(panels, alpha)); 
+    // std::vector<double> x{solveLinearSystem(linear_system.A, linear_system.b)}; 
 
-    printVector(x); //printing it out.
+    // printVector(x); //printing it out.
 
-    double testing{};
+    // double testing{};
     double perimeter{};
 
     for (int j = 0; j < N; ++j) //N is the number of panels
     {
-        testing += x[j] * panels[j].length;
+        // testing += x[j] * panels[j].length;
         perimeter += panels[j].length;
 
     }
-    std::cout << "The testing is: "<< testing << '\n';
-    double GAMMA{x.back() * perimeter};
-    double Cl{2*GAMMA};
-    std::cout << "GAMMA: " << GAMMA << '\n';
-    std::cout << "Cl for alpha{5 degrees} in radians is = " << Cl << '\n';
+    // std::cout << "The testing is: "<< testing << '\n';
+    // // double GAMMA{x.back() * perimeter};
+    // // double Cl{2*GAMMA};
+    // // std::cout << "GAMMA: " << GAMMA << '\n';
+    // // std::cout << "Cl for alpha{5 degrees} in radians is = " << Cl << '\n';
 
+
+
+    //Week D
+
+    std::vector<double> angles{};
+    std::vector<double> Cl{};
+
+    for (int degrees = -15; degrees <= 15; ++degrees)
+    {
+        double alpha{(degrees * pi)/180}; 
+
+
+        LinearSystem linear_system(matrixAssembly(panels, alpha)); 
+        std::vector<double> x{solveLinearSystem(linear_system.A, linear_system.b)}; 
+        
+        double GAMMA{x.back() * perimeter};
+        angles.push_back(static_cast<double>(degrees));
+        Cl.push_back(-2*GAMMA); //sign swapping for convention as initially clockwise building has been chosen.
+    }
+
+
+
+
+
+    if (!writeCSV_NACA(points, "points.csv"))
+        std::cout <<"Failed to open the csv file!";
+    if(!writeCSV_Panel(panels, "panel.csv"))
+        std::cout <<"Failed to open the csv file!";
+    if (!writeCSV_Polar(angles, Cl, "polar.csv"))
+        std::cout <<"Failed to open the csv file!";
     return 0;
     
 }

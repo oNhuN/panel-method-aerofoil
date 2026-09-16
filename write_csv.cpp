@@ -45,3 +45,17 @@ bool writeCSV_Panel(std::vector<Panel> & panels, const std::string & panel_csv)
     }
     return true;
 }
+
+
+bool writeCSV_Polar (std::vector<double> & angles, std::vector<double> & Cl, const std::string & polar_csv)
+{
+    std::ofstream polar_file {polar_csv};
+    if (angles.size() != Cl.size()) return false;
+    polar_file << "angle_deg,Cl" << '\n';
+
+    for (int k = 0; k < static_cast<int>(Cl.size()); ++k)
+    {
+        polar_file << angles[k] << ',' << Cl[k] << '\n';
+    }
+    return true;
+}
