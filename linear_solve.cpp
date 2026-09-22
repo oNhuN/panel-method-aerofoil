@@ -7,10 +7,10 @@ namespace
 {
     void forward_elimination(std::vector<std::vector<double>> & A, std::vector<double> & b) 
     {
-        const int n = static_cast<int>(A.size()); //number of rows that depends on the matrix A (size gives us the size of the matrix)
-        
+        const int n = static_cast<int>(A.size()); //number of rows that depends on the matrix A 
 
-        for (int k = 0; k <= n-2; ++k) //keeping track of the step that we are in.
+
+        for (int k = 0; k <= n-2; ++k) //k keeps track of the step that is during the solving process
         {
             int pivot_row = k;
 
@@ -38,7 +38,6 @@ namespace
         }
 
     }
-
 
     std::vector<double> back_substitution(const std::vector<std::vector<double>> &A, const std::vector<double> & b)
     {
@@ -71,7 +70,6 @@ std::vector<double> solveLinearSystem(std::vector<std::vector<double>> & A, std:
     return x;
 
 }
-
 
 void printMatrix(const std::vector<std::vector<double>>& A)
 {
