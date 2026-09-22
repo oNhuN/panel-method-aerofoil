@@ -13,9 +13,9 @@ int main ()
     const double t = 0.12;
 
     auto points{generateAerofoil(n_per_surface, m, p, t)}; //auto: works out the type of data from the initializer
-    
+    std::cout << "This is the total point count " << points.size() << '\n';
     auto panels{generatePanel(points)};
-
+    std::cout << "This is the total point count " << panels.size() << '\n';
     const int N {static_cast<int>(panels.size())}; //number of panels
     const double pi{std::numbers::pi};
     double perimeter{};
