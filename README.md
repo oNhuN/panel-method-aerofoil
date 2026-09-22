@@ -10,14 +10,14 @@ The NACA geometry is generated using the **cosine spacing method**, which depend
 
 The following physical assumptions are made for this idealised model:
 
-* **Inviscid flow** — viscosity is neglected.
-* **Incompressible flow** — density is treated as constant.
-* **Irrotational flow** — vorticity is zero in the fluid domain, apart from idealised singularities and the circulation representation.
-* **Steady flow** — the flow field is assumed not to change with time.
-* **Two-dimensional flow** — the airfoil is treated as an infinitely long 2D cross-section.
-* **Potential flow** — the velocity field can be described using a velocity potential.
-* **No penetration through the airfoil surface** — the flow is tangent to the surface.
-* **Kutta condition** — the circulation is determined so that the flow leaves the trailing edge in a physically reasonable way.
+* **Inviscid flow**: viscosity is neglected.
+* **Incompressible flow**: density is treated as constant.
+* **Irrotational flow**: vorticity is zero in the fluid domain, apart from idealised singularities and the circulation representation.
+* **Steady flow**: the flow field is assumed not to change with time.
+* **Two-dimensional flow**: the airfoil is treated as an infinitely long 2D cross-section.
+* **Potential flow**: the velocity field can be described using a velocity potential.
+* **No penetration through the airfoil surface**: the flow is tangent to the surface.
+* **Kutta condition**: the circulation is determined so that the flow leaves the trailing edge in a physically reasonable way.
 
 The airfoil surface is divided into panels, where each panel is a straight line connecting two consecutive geometry points. The source influence of each panel is calculated at the midpoint of the relevant panel, which acts as the control point where the flow tangency boundary condition is applied.
 
